@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Fly : MonoBehaviour
 {
+    public ScoreBoard scoreBoard;
     public TextMeshProUGUI scoreText;
     private Rigidbody2D rb;
     public float JumpForce = 6;
@@ -44,5 +45,13 @@ public class Fly : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         scoreText.text = (++point).ToString("D4");
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        scoreBoard.ShowScoreBoard(point);
+        gameObject.SetActive(false);
+
+        
     }
 }
